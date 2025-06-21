@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Aniversário, Bea!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1 class="feliz">Feliz Aniversário, Bea! <span>💕</span></h1>
+
+  <!-- Corações flutuantes -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Player de áudio -->
+  <div class="custom-audio-player">
+    <audio id="audio" autoplay>
+      <source src="nossa musica.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
+    </audio>
+    <div class="controls">
+      <button id="playBtn" onclick="togglePlay()"></button>
+      <input type="range" id="seekBar" value="0" min="0" max="100">
+    </div>
+  </div>
+
+
+  <!-- Galeria de imagens -->
+  <div class="gallery">
+    <div>
+      <img src="imagem/duo.jpg" alt="Valorant juntos" />
+      <div class="caption">Onde tudo começou</div>
+    </div>
+
+    <div>
+      <img src="imagem/Café.jpg" alt="Café da manhã" />
+      <div class="caption">Nosso primeiro café da manhã juntos</div>
+    </div>
+
+    <div>
+      <img src="imagem/juntos.jpg" alt="Selfie feliz" />
+      <div class="caption">Estou com saudade de você</div>
+    </div>
+
+    <div>
+      <img src="imagem/O calor do seu toque.jpg" alt="Primeiro toque" />
+      <div class="caption">Nosso primeiro toque</div>
+    </div>
+
+    <div>
+      <img src="imagem/roblox.jpg" alt="Roblox carinho" />
+      <div class="caption">Roblox não pode faltar</div>
+    </div>
+  </div>
+
+  <!-- Mensagem -->
+  <div class="message">
+    “Lembre‑se que existe uma pessoa que te ama muito do outro lado do Brasil, que não tem nada nesse mundo que ele não faça por você.”
+  </div>
+
+  <!-- Botão de surpresa -->
+  <div class="surprise">
+    <button onclick="showPopup()">Clique aqui meu bem...🎁</button>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2>💘 Feliz aniversário, meu amor! 💘</h2>
+      <p>
+        Hoje você faz 16 aninhos, minha menininha está crescendo 😊 Eu tenho muito orgulho de você, continue sendo essa menina esforçada e inteligente, que consiga conquistar cada um dos seus objetivos.
+        Não se esqueça de que você é uma pessoa maravilhosa e muito linda, você é uma bonequinha!! Eu te amo. ✨
+      </p>
+      <div class="explosion">
+        <span>💖</span><span>💘</span><span>🩷</span><span>💝</span><span>💓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function showPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // corações flutuantes
+    const hearts = document.getElementById("hearts");
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+      heart.style.top = "100%";
+      hearts.appendChild(heart);
+    }
+    // player de áudio
+     const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const seekBar = document.getElementById('seekBar');
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playBtn.style.setProperty('--icon', `'❚❚'`);
+        playBtn.innerHTML = '';
+      } else {
+        audio.pause();
+        playBtn.style.setProperty('--icon', `'▶️'`);
+        playBtn.innerHTML = '';
+      }
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const value = (audio.currentTime / audio.duration) * 100;
+      seekBar.value = value;
+    });
+
+    seekBar.addEventListener('input', () => {
+      const time = (seekBar.value / 100) * audio.duration;
+      audio.currentTime = time;
+    });
+  </script>
+
+  
+
+</body>
+</html>
